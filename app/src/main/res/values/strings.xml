@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Score Keeper</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="serving">Serving</string>
+    <string name="sets">Sets</string>
+    <string name="blank_score">0</string>
+    <string name="games">Games</string>
+    <string name="points">Points</string>
+    <string name="won_point">Add Point</string>
+    <string name="undo_point">Undo Point</string>
+    <string name="reset">Reset</string>
+    <string name="winner">Winner:</string>
+</resources>

@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp_width"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -22,16 +22,16 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
-                android:padding="10dp"
+                android:padding="@dimen/player_padding"
                 android:text="@string/player_1"
-                android:textColor="#616161"
-                android:textSize="14sp" />
+                android:textColor="@color/playerTextColor"
+                android:textSize="@dimen/label_text_size" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_height="@dimen/one_dp_height"
+                android:layout_marginLeft="@dimen/view_left_margin"
+                android:layout_marginRight="@dimen/view_right_margin"
                 android:background="@android:color/darker_gray" />
 
             <TextView
@@ -39,10 +39,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/textview_top_padding"
                 android:text="@string/sets"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player1_sets"
@@ -52,17 +52,17 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/textview_top_padding"
                 android:text="@string/games"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player1_games"
@@ -72,17 +72,17 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/textview_top_padding"
                 android:text="@string/points"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player1_points"
@@ -92,15 +92,15 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <Button
                 android:id="@+id/player1_add_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/button_left_margin"
+                android:layout_marginRight="@dimen/button_right_margin"
+                android:layout_marginTop="@dimen/button_top_margin"
                 android:onClick="addPointForPlayer1"
                 android:text="@string/won_point" />
 
@@ -108,21 +108,21 @@
                 android:id="@+id/player1_undo_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/button_left_margin"
+                android:layout_marginRight="@dimen/button_right_margin"
+                android:layout_marginTop="@dimen/button_top_margin"
                 android:onClick="removePointFromPlayer1"
                 android:text="@string/undo_point" />
         </LinearLayout>
 
         <View
-            android:layout_width="1dp"
+            android:layout_width="@dimen/one_dp_width"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/view_top_margin"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp_width"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -132,27 +132,27 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
-                android:padding="10dp"
+                android:padding="@dimen/player_padding"
                 android:text="@string/player_2"
-                android:textColor="#616161"
-                android:textSize="14sp" />
+                android:textColor="@color/playerTextColor"
+                android:textSize="@dimen/label_text_size" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_height="@dimen/one_dp_height"
+                android:layout_marginLeft="@dimen/view_left_margin"
+                android:layout_marginRight="@dimen/view_right_margin"
                 android:background="@android:color/darker_gray" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textview_top_padding"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
                 android:text="@string/sets"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player2_sets"
@@ -162,17 +162,17 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textview_top_padding"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
                 android:text="@string/games"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player2_games"
@@ -182,17 +182,17 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textview_top_padding"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp"
                 android:text="@string/points"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/label_text_size" />
 
             <TextView
                 android:id="@+id/player2_points"
@@ -202,15 +202,15 @@
                 android:gravity="center_horizontal"
                 android:text="@string/blank_score"
                 android:textColor="@color/scoreColor"
-                android:textSize="36sp" />
+                android:textSize="@dimen/score_text_size" />
 
             <Button
                 android:id="@+id/player2_add_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/button_left_margin"
+                android:layout_marginRight="@dimen/button_left_margin"
+                android:layout_marginTop="@dimen/button_top_margin"
                 android:onClick="addPointForPlayer2"
                 android:text="@string/won_point" />
 
@@ -218,9 +218,9 @@
                 android:id="@+id/player2_undo_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/button_left_margin"
+                android:layout_marginRight="@dimen/button_left_margin"
+                android:layout_marginTop="@dimen/button_top_margin"
                 android:onClick="removePointFromPlayer2"
                 android:text="@string/undo_point" />
         </LinearLayout>
@@ -232,7 +232,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/reset_button_margin"
         android:onClick="startNewGame"
         android:text="@string/reset" />
 
@@ -242,10 +242,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/scoring_layout"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
         android:fontFamily="sans-serif-medium"
+        android:padding="@dimen/player_padding"
         android:text="@string/winner"
         android:textColor="@color/scoreColor"
-        android:textSize="24sp"
+        android:textSize="@dimen/winner_text_zize"
         android:visibility="visible" />
 </RelativeLayout>

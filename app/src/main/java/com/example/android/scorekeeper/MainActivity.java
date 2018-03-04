@@ -7,6 +7,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    TextView winnerView;
+    Button resetAllScores;
+    Button addPlayer1Button;
+    Button addPlayer2Button;
+    Button undoPlayer1Button;
+    Button undoPlayer2Button;
+    TextView scoreSetsPlayer1View;
+    TextView scoreSetsPlayer2View;
+    TextView scoreGamesPlayer1View;
+    TextView scoreGamesPlayer2View;
+    TextView scorePointsPlayer1View;
+    TextView scorePointsPlayer2View;
+
     int scoringPoints = 1;
     int scoringGames  = 2;
     int scoringSets   = 3;
@@ -22,33 +35,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTextViewVisibilityStatus(R.id.winner_is, View.GONE);
-        setButtonEnabledStatus(R.id.player1_undo_button, false);
-        setButtonEnabledStatus(R.id.player2_undo_button, false);
+        winnerView              = (TextView) findViewById(R.id.winner_is);
+        resetAllScores          = (Button) findViewById(R.id.reset_button);
+        addPlayer1Button        = (Button) findViewById(R.id.player1_add_button);
+        addPlayer2Button        = (Button) findViewById(R.id.player2_add_button);
+        undoPlayer1Button       = (Button) findViewById(R.id.player1_undo_button);
+        undoPlayer2Button       = (Button) findViewById(R.id.player2_undo_button);
+        scoreSetsPlayer1View    = (TextView) findViewById(R.id.player1_sets);
+        scoreSetsPlayer2View    = (TextView) findViewById(R.id.player2_sets);
+        scoreGamesPlayer1View   = (TextView) findViewById(R.id.player1_games);
+        scoreGamesPlayer2View   = (TextView) findViewById(R.id.player2_games);
+        scorePointsPlayer1View  = (TextView) findViewById(R.id.player1_points);
+        scorePointsPlayer2View  = (TextView) findViewById(R.id.player2_points);
+
+        setTextViewVisibilityStatus(winnerView, View.GONE);
+        setButtonEnabledStatus(undoPlayer1Button, false);
+        setButtonEnabledStatus(undoPlayer2Button, false);
     }
 
     /**
      * Set the 'visible' property of a specific TextView
      */
-    public void setTextViewVisibilityStatus(int viewId, int visibilityType) {
-        TextView myView = (TextView) findViewById(viewId);
-        myView.setVisibility(visibilityType);
+    public void setTextViewVisibilityStatus(View v, int visibilityType) {
+        v.setVisibility(visibilityType);
     }
 
     /**
      * Set the 'enabled' property of a specific Button
      */
-    public void setButtonEnabledStatus(int buttonId, boolean status) {
-        Button myButton = (Button) findViewById(buttonId);
-        myButton.setEnabled(status);
+    public void setButtonEnabledStatus(View v, boolean status) {
+        v.setEnabled(status);
     }
 
     /**
      * Display the given score for a given Player
      */
-    public void displayScoreForPlayer(int score, int playerId, int scoreType) {
+    public void displayScoreForPlayer(TextView v, int score, int scoreType) {
         String scoreStr;
-        TextView scoreView = (TextView) findViewById(playerId);
 
         if (scoreType == scoringPoints) {
             switch (score) {
@@ -70,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     scoreStr = "    ";
             }
-            scoreView.setText(scoreStr);
+            v.setText(scoreStr);
         } else {
-            scoreView.setText(String.valueOf(score));
+            v.setText(String.valueOf(score));
         }
     }
 
@@ -80,18 +103,18 @@ public class MainActivity extends AppCompatActivity {
      * Display all scores
      */
     public void displayAllScores() {
-        displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, 1);
-        displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, 1);
-        displayScoreForPlayer(currentScoresForPlayer1[1], R.id.player1_games, 2);
-        displayScoreForPlayer(currentScoresForPlayer2[1], R.id.player2_games, 2);
-        displayScoreForPlayer(currentScoresForPlayer1[2], R.id.player1_sets, 3);
-        displayScoreForPlayer(currentScoresForPlayer2[2], R.id.player2_sets, 3);
+        displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], 1);
+        displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], 1);
+        displayScoreForPlayer(scoreGamesPlayer1View, currentScoresForPlayer1[1], 2);
+        displayScoreForPlayer(scoreGamesPlayer2View, currentScoresForPlayer2[1], 2);
+        displayScoreForPlayer(scoreSetsPlayer1View, currentScoresForPlayer1[2], 3);
+        displayScoreForPlayer(scoreSetsPlayer2View, currentScoresForPlayer2[2], 3);
     }
 
     /**
      * Reset both players' scores
      */
-    public void resetAllScores() {
+    public void resetAllPlayersScores() {
         for(int i = 0; i < 3; i++) {
             currentScoresForPlayer1[i] = 0;
             currentScoresForPlayer2[i] = 0;
@@ -136,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         //
         // Has 'Player 1' won the game?
         if (currentScoresForPlayer1[0] < 4) {         // No, not yet
-            displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
+            displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
         } else {                            // Maybe
             // In addition to winning at least four (4) points to win a game, a player must
             // have won two (2) more points than their opponent
@@ -147,17 +170,17 @@ public class MainActivity extends AppCompatActivity {
                 case 0:                     // No, not yet
                     currentScoresForPlayer1[0] = 3;
                     currentScoresForPlayer2[0] = currentScoresForPlayer1[0];
-                    displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
-                    displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
+                    displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
+                    displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
                     break;
                 case 1:                     // No, not yet
                     // Is 'Player 1' leading the score in the current game?
                     if (currentScoresForPlayer1[0] > currentScoresForPlayer2[0]) {                  // Yes
-                        displayScoreForPlayer(5, R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(6, R.id.player2_points, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, 5, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, 6, scoringPoints);
                     } else {                                                    // No
-                        displayScoreForPlayer(6, R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(5, R.id.player2_points, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, 6, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, 5, scoringPoints);
                     }
                     break;
                 default:                    // Yes
@@ -172,31 +195,30 @@ public class MainActivity extends AppCompatActivity {
                         currentScoresForPlayer2[0] = 0;
                         currentScoresForPlayer1[1] = 0;
                         currentScoresForPlayer2[1] = 0;
-                        displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer1[1], R.id.player1_games, scoringGames);
-                        displayScoreForPlayer(currentScoresForPlayer2[1], R.id.player2_games, scoringGames);
-                        displayScoreForPlayer(currentScoresForPlayer1[2], R.id.player1_sets, scoringSets);
+                        displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
+                        displayScoreForPlayer(scoreGamesPlayer1View, currentScoresForPlayer1[1], scoringGames);
+                        displayScoreForPlayer(scoreGamesPlayer2View, currentScoresForPlayer2[1], scoringGames);
+                        displayScoreForPlayer(scoreSetsPlayer1View, currentScoresForPlayer1[2], scoringSets);
                         // Has 'Player 1' won the match?
                         if (currentScoresForPlayer1[2] == 2) {
-                            TextView viewWinner = (TextView) findViewById(R.id.winner_is);
-                            viewWinner.setText("Winner is: Player 1");
-                            viewWinner.setVisibility(View.VISIBLE);
-                            setButtonEnabledStatus(R.id.player1_add_button, false);
-                            setButtonEnabledStatus(R.id.player2_add_button, false);
+                            winnerView.setText("Winner is: Player 1");
+                            winnerView.setVisibility(View.VISIBLE);
+                            setButtonEnabledStatus(addPlayer1Button, false);
+                            setButtonEnabledStatus(addPlayer1Button, false);
                         }
                     } else {                                                                    // No
                         currentScoresForPlayer1[0] = 0;
                         currentScoresForPlayer2[0] = 0;
-                        displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer1[1], R.id.player1_games, scoringGames);
+                        displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
+                        displayScoreForPlayer(scoreGamesPlayer1View, currentScoresForPlayer1[1], scoringGames);
                     }
                     break;
             }
         }
-        setButtonEnabledStatus(R.id.player1_undo_button, true);
-        setButtonEnabledStatus(R.id.player2_undo_button, false);
+        setButtonEnabledStatus(undoPlayer1Button, true);
+        setButtonEnabledStatus(undoPlayer2Button, false);
     }
 
     /**
@@ -204,11 +226,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void removePointFromPlayer1(View v) {
         if (currentScoresForPlayer1[2] == 2) {
-            setTextViewVisibilityStatus(R.id.winner_is, View.GONE);
-            setButtonEnabledStatus(R.id.player1_add_button, true);
-            setButtonEnabledStatus(R.id.player2_add_button, true);
+            setTextViewVisibilityStatus(winnerView, View.GONE);
+            setButtonEnabledStatus(addPlayer1Button, true);
+            setButtonEnabledStatus(addPlayer2Button, true);
         }
-        setButtonEnabledStatus(R.id.player1_undo_button, false);
+        setButtonEnabledStatus(undoPlayer1Button, false);
         ignoreLastPoint();
     }
 
@@ -222,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         //
         // Has 'Player 2' won the game?
         if (currentScoresForPlayer2[0] < 4) {         // No, not yet
-            displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
+            displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
         } else {                            // Maybe
             // In addition to winning at least four (4) points to win a game, a player must
             // have won two (2) more points than their opponent
@@ -233,17 +255,17 @@ public class MainActivity extends AppCompatActivity {
                 case 0:                     // No, not yet
                     currentScoresForPlayer2[0] = 3;
                     currentScoresForPlayer1[0] = currentScoresForPlayer2[0];
-                    displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
-                    displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
+                    displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
+                    displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
                     break;
                 case 1:                     // No, not yet
                     // Is 'Player 2' leading the score in the current game?
                     if (currentScoresForPlayer2[0] > currentScoresForPlayer1[0]) {                  // Yes
-                        displayScoreForPlayer(5, R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(6, R.id.player1_points, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, 5, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, 6, scoringPoints);
                     } else {                                                    // No
-                        displayScoreForPlayer(6, R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(5, R.id.player1_points, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer2View, 56, scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, 55, scoringPoints);
                     }
                     break;
                 default:                    // Yes
@@ -258,31 +280,30 @@ public class MainActivity extends AppCompatActivity {
                         currentScoresForPlayer1[0] = 0;
                         currentScoresForPlayer2[1] = 0;
                         currentScoresForPlayer1[1] = 0;
-                        displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer1[1], R.id.player1_games, scoringGames);
-                        displayScoreForPlayer(currentScoresForPlayer2[1], R.id.player2_games, scoringGames);
-                        displayScoreForPlayer(currentScoresForPlayer2[2], R.id.player2_sets, scoringSets);
+                        displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
+                        displayScoreForPlayer(scoreGamesPlayer2View, currentScoresForPlayer2[1], scoringGames);
+                        displayScoreForPlayer(scoreGamesPlayer1View, currentScoresForPlayer1[1], scoringGames);
+                        displayScoreForPlayer(scoreSetsPlayer2View, currentScoresForPlayer2[2], scoringSets);
                         // Has 'Player 2' won the match?
                         if (currentScoresForPlayer2[2] == 2) {
-                            TextView viewWinner = (TextView) findViewById(R.id.winner_is);
-                            viewWinner.setText("Winner is: Player 2");
-                            viewWinner.setVisibility(View.VISIBLE);
-                            setButtonEnabledStatus(R.id.player1_add_button, false);
-                            setButtonEnabledStatus(R.id.player2_add_button, false);
+                            winnerView.setText("Winner is: Player 2");
+                            winnerView.setVisibility(View.VISIBLE);
+                            setButtonEnabledStatus(addPlayer1Button, false);
+                            setButtonEnabledStatus(addPlayer2Button, false);
                         }
                     } else {                                                                    // No
                         currentScoresForPlayer2[0] = 0;
                         currentScoresForPlayer1[0] = 0;
-                        displayScoreForPlayer(currentScoresForPlayer2[0], R.id.player2_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer1[0], R.id.player1_points, scoringPoints);
-                        displayScoreForPlayer(currentScoresForPlayer2[1], R.id.player2_games, scoringGames);
+                        displayScoreForPlayer(scorePointsPlayer2View, currentScoresForPlayer2[0], scoringPoints);
+                        displayScoreForPlayer(scorePointsPlayer1View, currentScoresForPlayer1[0], scoringPoints);
+                        displayScoreForPlayer(scoreGamesPlayer2View, currentScoresForPlayer2[1], scoringGames);
                     }
                     break;
             }
         }
-        setButtonEnabledStatus(R.id.player1_undo_button, false);
-        setButtonEnabledStatus(R.id.player2_undo_button, true);
+        setButtonEnabledStatus(undoPlayer1Button, false);
+        setButtonEnabledStatus(undoPlayer2Button, true);
     }
 
     /**
@@ -290,11 +311,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void removePointFromPlayer2(View v) {
         if (currentScoresForPlayer2[2] == 2) {
-            setTextViewVisibilityStatus(R.id.winner_is, View.GONE);
-            setButtonEnabledStatus(R.id.player1_add_button, true);
-            setButtonEnabledStatus(R.id.player2_add_button, true);
+            setTextViewVisibilityStatus(winnerView, View.GONE);
+            setButtonEnabledStatus(addPlayer1Button, true);
+            setButtonEnabledStatus(addPlayer2Button, true);
         }
-        setButtonEnabledStatus(R.id.player2_undo_button, false);
+        setButtonEnabledStatus(undoPlayer2Button, false);
         ignoreLastPoint();
     }
 
@@ -302,12 +323,12 @@ public class MainActivity extends AppCompatActivity {
      * Start a new game
      */
     public void startNewGame(View v) {
-        resetAllScores();
+        resetAllPlayersScores();
         displayAllScores();
-        setTextViewVisibilityStatus(R.id.winner_is, View.GONE);
-        setButtonEnabledStatus(R.id.player1_add_button, true);
-        setButtonEnabledStatus(R.id.player2_add_button, true);
-        setButtonEnabledStatus(R.id.player1_undo_button, false);
-        setButtonEnabledStatus(R.id.player2_undo_button, false);
+        setTextViewVisibilityStatus(winnerView, View.GONE);
+        setButtonEnabledStatus(addPlayer1Button, true);
+        setButtonEnabledStatus(addPlayer2Button, true);
+        setButtonEnabledStatus(undoPlayer1Button, false);
+        setButtonEnabledStatus(undoPlayer2Button, false);
     }
 }

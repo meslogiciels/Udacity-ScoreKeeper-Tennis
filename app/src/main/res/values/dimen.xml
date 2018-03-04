@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero_dp_width">0dp</dimen>
+    <dimen name="one_dp_width">1dp</dimen>
+    <dimen name="one_dp_height">1dp</dimen>
+    <dimen name="player_padding">10dp</dimen>
+    <dimen name="view_top_margin">16dp</dimen>
+    <dimen name="view_left_margin">24dp</dimen>
+    <dimen name="view_right_margin">24dp</dimen>
+    <dimen name="button_top_margin">8dp</dimen>
+    <dimen name="button_left_margin">24dp</dimen>
+    <dimen name="button_right_margin">24dp</dimen>
+    <dimen name="textview_top_padding">8dp</dimen>
+    <dimen name="reset_button_margin">12dp</dimen>
+
+    <dimen name="label_text_size">14sp</dimen>
+    <dimen name="winner_text_zize">24sp</dimen>
+    <dimen name="score_text_size">36sp</dimen>
+</resources>
